@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_department,employee_department,model_employee_department,,1,1,1,1
+access_employee_position,employee_position,model_employee_position,,1,1,1,1
+access_employee,employee,model_visitor_log_book_employee,,1,1,1,1
+access_visitor_designation,visitor_designation,model_visitor_designation,,1,1,1,1
+access_visitor_company,visitor_company,model_visitor_company,,1,1,1,1
+access_visitor,visitor,model_visitor_log_book_visitor,,1,1,1,1
+access_appointment,appointment,model_appointment,,1,1,1,1
+access_checkinout,checkinout,model_visitor_log_book_checkinout,,1,1,1,1

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+
+<!--        check in checkout list-->
+        <record id="visitor_list" model="ir.ui.view">
+            <field name="name">Visitor List</field>
+            <field name="model">visitor_log_book.visitor</field>
+            <field name="arch" type="xml">
+                <tree string="Visitor List">
+
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="company"/>
+                    <field name="designation"/>
+                    <field name="nid"/>
+                    <field name="visitor_id"/>
+                </tree>
+            </field>
+        </record>
+<!--        check in checkout form-->
+        <record id="visitor_form" model="ir.ui.view">
+            <field name="name">Visitor Form</field>
+            <field name="model">visitor_log_book.visitor</field>
+            <field name="arch" type="xml">
+                <form string="Visitor Form">
+
+                    <sheet>
+
+                        <div class="oe_button_box" name="button_box">
+                        <!--button type object -->
+                            <button class="oe_stat_button" type="object" name="redirect_checkin" icon="fa-arrow-right" string="CheckIn Now">
+                             </button>
+                             <button class="oe_stat_button" type="object" name="get_total_visit" icon="fa-calendar">
+                           <field name="total_visit" string="Time Visit" widget="statinfo"/>
+                            </button>
+                         </div>
+                         <div class="oe_title">
+                 Visitor ID: <strong> <field name="visitor_id" readonly="1"/></strong>
+            </div>
+
+
+
+                            <group string="Visitor Information">
+                                <group>
+                                     <field name="name" placeholder="Phone Number"/>
+                                    <field name="phone" placeholder="Name"/>
+                                </group>
+
+                                <group>
+                                     <field name="company" placeholder="Company(optional)"/>
+                                <field name="designation" placeholder="Designation(optional)"/>
+                                <field name="nid" placeholder="(Optional)"/>
+
+                                </group>
+
+<!--                        testing purpose-->
+
+                            </group>
+
+
+
+                    </sheet>
+
+                    <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="activity_ids" widget="mail_activity"/>
+            <field name="message_ids" widget="mail_thread" option="{'post_refresh':'recipients'}"/>
+        </div>
+                </form>
+            </field>
+        </record>
+
+
+
+        <!--   search view of Visitor -->
+
+    <record id="visitor_search" model="ir.ui.view">
+            <field name="name">Visitor search</field>
+            <field name="model">visitor_log_book.visitor</field>
+            <field name="arch" type="xml">
+                <search>
+                <field name="name" filter_domain="['|','|','|',('name','ilike',self),('phone','ilike',self),('nid','ilike',self),('visitor_id','ilike',self)]"/>
+
+                <group string="Group By">
+                 <filter name="company" string="Company" context="{'group_by':'company'}"/>
+                 <filter name="designation" string="Designation" context="{'group_by':'designation'}"/>
+                </group>
+                </search>
+
+            </field>
+        </record>
+<!--        checkinout actions -->
+        <record id="visitor_action" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Visitor </field>
+            <field name="res_model">visitor_log_book.visitor</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p> No Visitor created Yet!!</p>
+            </field>
+        </record>
+
+
+        <menuitem id="visitor_menu" parent="root_menu" sequence="3" name="Visitor" action="visitor_action"/>
+
+     </data>
+</odoo>
